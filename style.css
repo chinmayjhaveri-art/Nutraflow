@@ -1,4 +1,5 @@
-/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
 *{
     margin:0;
     padding:0;
@@ -7,135 +8,32 @@
 }
 
 body{
-    background:linear-gradient(135deg,#f3fff5,#ecfff1);
-    color:#222;
+    background:linear-gradient(135deg,#F0FDF4,#DCFCE7);
+    color:#1F2937;
+    min-height:100vh;
 }
 
 /* Navigation */
 
 nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 8%;
-    background:white;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
     position:sticky;
     top:0;
-    z-index:1000;
-}
-
-.logo{
-    font-size:30px;
-    font-weight:700;
-    color:#16A34A;
-}
-
-nav ul{
-    display:flex;
-    list-style:none;
-    gap:35px;
-}
-
-nav li{
-    cursor:pointer;
-    transition:.3s;
-}
-
-nav li:hover{
-    color:#16A34A;
-}
-
-#darkModeBtn{
-    background:#16A34A;
-    color:white;
-    border:none;
-    width:50px;
-    height:50px;
-    border-radius:50%;
-    font-size:20px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-#darkModeBtn:hover{
-    transform:rotate(20deg);
-}
-
-/* Hero */
-
-.hero{
-    max-width:1000px;
-    margin:70px auto;
-    text-align:center;
-    padding:0 20px;
-}
-
-.hero h1{
-    font-size:65px;
-    color:#16A34A;
-}
-
-.hero h2{
-    font-size:40px;
-    margin-top:10px;
-}
-
-.hero p{
-    margin:30px auto;
-    max-width:700px;
-    line-height:1.8;
-    color:#555;
-    font-size:18px;
-}
-
-/* Search */
-
-.search-container{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-.search-container input{
-    width:500px;
-    max-width:100%;
-    padding:18px;
-    border:none;
-    border-radius:20px;
-    font-size:17px;
-    box-shadow:0 10px 25px rgba(0,0,0,.1);
-    outline:none;
-}
-
-.search-container button{
-    padding:18px 35px;
-    border:none;
-    border-radius:20px;
-    background:#16A34A;
-    color:white;
-    font-size:17px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.search-container button:hover{
-    background:#15803D;
-    transform:translateY(-3px);
-}
-
-/* Popular Foods */
+    z-index:
+        /* ==========================
+   Popular Foods
+========================== */
 
 .popular{
-    max-width:1100px;
-    margin:auto;
+    max-width:1200px;
+    margin:40px auto;
     padding:20px;
 }
 
 .popular h2{
-    margin-bottom:25px;
     text-align:center;
+    color:#15803D;
+    margin-bottom:30px;
+    font-size:2rem;
 }
 
 .chips{
@@ -146,103 +44,351 @@ nav li:hover{
 }
 
 .chips button{
-    padding:12px 22px;
-    border:none;
-    border-radius:50px;
     background:white;
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
+    border:none;
+    padding:14px 24px;
+    border-radius:50px;
     cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
     transition:.3s;
 }
 
 .chips button:hover{
     background:#16A34A;
     color:white;
+    transform:translateY(-3px);
 }
 
-/* Result Card */
+/* ==========================
+   Result Card
+========================== */
 
 .result-card{
     display:none;
-    max-width:1000px;
+    max-width:1100px;
     margin:50px auto;
     background:white;
-    padding:40px;
     border-radius:30px;
-    box-shadow:0 15px 40px rgba(0,0,0,.12);
+    padding:40px;
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
 }
 
-.result-card h2{
-    text-align:center;
-    color:#16A34A;
+.food-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     margin-bottom:35px;
+    flex-wrap:wrap;
+    gap:15px;
 }
+
+.food-header h2{
+    color:#16A34A;
+    font-size:2rem;
+}
+
+#favoriteBtn{
+    border:none;
+    background:#16A34A;
+    color:white;
+    padding:12px 24px;
+    border-radius:15px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+#favoriteBtn:hover{
+    background:#15803D;
+    transform:scale(1.05);
+}
+
+/* ==========================
+   Health Score
+========================== */
+
+.health-score{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.circle{
+    width:180px;
+    height:180px;
+    margin:auto;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#22C55E,#16A34A);
+    color:white;
+    font-size:42px;
+    font-weight:700;
+    box-shadow:0 20px 40px rgba(34,197,94,.3);
+}
+
+.health-score p{
+    margin-top:15px;
+    font-size:18px;
+    font-weight:600;
+    color:#15803D;
+}
+/* ==========================
+   Nutrition Grid
+========================== */
 
 .nutrition-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
     gap:20px;
+    margin-top:30px;
 }
 
 .box{
     background:#F0FDF4;
-    padding:25px;
     border-radius:20px;
+    padding:25px;
     text-align:center;
+    font-size:18px;
     font-weight:600;
     transition:.3s;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
 .box:hover{
-    transform:translateY(-5px);
+    transform:translateY(-6px);
 }
 
 .box span{
     display:block;
-    margin-top:12px;
-    font-size:24px;
+    margin-top:15px;
     color:#16A34A;
+    font-size:28px;
+    font-weight:700;
 }
 
-.glucose,
+/* ==========================
+   Section Title
+========================== */
+
+.section-title{
+    margin-top:45px;
+    margin-bottom:20px;
+    color:#15803D;
+    font-size:28px;
+}
+
+/* ==========================
+   Progress Bars
+========================== */
+
+.progress{
+    margin-bottom:25px;
+}
+
+.progress p{
+    margin-bottom:8px;
+    font-weight:600;
+    color:#374151;
+}
+
+.bar{
+    width:100%;
+    height:18px;
+    background:#E5E7EB;
+    border-radius:30px;
+    overflow:hidden;
+}
+
+.bar div{
+    height:100%;
+    width:0%;
+    border-radius:30px;
+    background:linear-gradient(90deg,#22C55E,#16A34A);
+    transition:width 1s ease;
+}
+
+/* ==========================
+   Smart Tip
+========================== */
+
 .tip{
-    margin-top:30px;
-    padding:25px;
-    border-radius:20px;
-}
-
-.glucose{
-    background:#DCFCE7;
-}
-
-.tip{
+    margin-top:40px;
     background:#FEF9C3;
+    border-left:8px solid #FACC15;
+    padding:25px;
+    border-radius:18px;
 }
+
+.tip h3{
+    color:#854D0E;
+    margin-bottom:10px;
+}
+
+.tip p{
+    line-height:1.7;
+    color:#4B5563;
+    font-size:17px;
+}
+
+/* ==========================
+   Loading Animation
+========================== */
+
+.loading{
+    animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+
+0%{
+opacity:.5;
+}
+
+50%{
+opacity:1;
+}
+
+100%{
+opacity:.5;
+}
+
+}
+
+/* ==========================
+   Fade Animation
+========================== */
+
+.result-card{
+    animation:fadeIn .5s ease;
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+transform:translateY(25px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+/* ==========================
+   Footer
+========================== */
 
 footer{
     margin-top:80px;
-    text-align:center;
     padding:30px;
-    color:#777;
+    text-align:center;
+    color:#6B7280;
+    font-size:15px;
 }
 
-/* Responsive */
+/* ==========================
+   Dark Mode
+========================== */
 
-@media(max-width:900px){
+.dark{
+    background:#0F172A;
+    color:white;
+}
+
+.dark nav{
+    background:#111827;
+}
+
+.dark .logo{
+    color:#4ADE80;
+}
+
+.dark .hero h1,
+.dark .hero h2,
+.dark .popular h2,
+.dark .section-title,
+.dark .food-header h2{
+    color:white;
+}
+
+.dark .hero p{
+    color:#CBD5E1;
+}
+
+.dark .search-container input{
+    background:#1E293B;
+    color:white;
+}
+
+.dark .search-container input::placeholder{
+    color:#94A3B8;
+}
+
+.dark .chips button{
+    background:#1E293B;
+    color:white;
+}
+
+.dark .chips button:hover{
+    background:#16A34A;
+}
+
+.dark .result-card{
+    background:#111827;
+}
+
+.dark .box{
+    background:#1E293B;
+    color:white;
+}
+
+.dark .box span{
+    color:#4ADE80;
+}
+
+.dark .bar{
+    background:#334155;
+}
+
+.dark .tip{
+    background:#3F3F1A;
+    color:white;
+}
+
+.dark .tip p{
+    color:#E5E7EB;
+}
+
+.dark footer{
+    color:#CBD5E1;
+}
+
+/* ==========================
+   Responsive Design
+========================== */
+
+@media (max-width:992px){
 
 nav{
     flex-direction:column;
     gap:20px;
 }
 
-nav ul{
+.nav-links{
     flex-wrap:wrap;
     justify-content:center;
-    gap:15px;
 }
 
 .hero h1{
-    font-size:45px;
+    font-size:48px;
 }
 
 .hero h2{
@@ -260,43 +406,107 @@ nav ul{
     max-width:500px;
 }
 
+.food-header{
+    flex-direction:column;
+    text-align:center;
+}
+
+.circle{
+    width:150px;
+    height:150px;
+    font-size:36px;
+}
+
+}
+
+@media (max-width:768px){
+
+.hero{
+    padding:40px 20px;
+}
+
+.hero h1{
+    font-size:38px;
+}
+
+.hero h2{
+    font-size:26px;
+}
+
+.hero p{
+    font-size:16px;
+}
+
 .result-card{
     margin:20px;
     padding:25px;
 }
 
+.nutrition-grid{
+    grid-template-columns:1fr;
 }
 
-/* Dark Mode */
-
-.dark{
-    background:#111827;
-    color:white;
+.box{
+    font-size:16px;
 }
 
-.dark nav{
-    background:#1F2937;
+.circle{
+    width:130px;
+    height:130px;
+    font-size:30px;
 }
 
-.dark .result-card,
-.dark .chips button,
-.dark .search-container input{
-    background:#374151;
-    color:white;
+.popular{
+    padding:15px;
 }
 
-.dark .box{
-    background:#1F2937;
 }
 
-.dark .glucose{
-    background:#14532D;
+/* ==========================
+   Custom Scrollbar
+========================== */
+
+::-webkit-scrollbar{
+    width:10px;
 }
 
-.dark .tip{
-    background:#78350F;
+::-webkit-scrollbar-track{
+    background:#E5E7EB;
 }
 
-.dark footer{
-    color:#ccc;
+::-webkit-scrollbar-thumb{
+    background:#16A34A;
+    border-radius:20px;
 }
+
+::-webkit-scrollbar-thumb:hover{
+    background:#15803D;
+}
+
+/* ==========================
+   Smooth Scrolling
+========================== */
+
+html{
+    scroll-behavior:smooth;
+}
+
+/* ==========================
+   Button Animation
+========================== */
+
+button{
+    transition:all .3s ease;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+/* ==========================
+   Card Hover
+========================== */
+
+.result-card:hover{
+    box-shadow:0 25px 60px rgba(0,0,0,.15);
+}    
