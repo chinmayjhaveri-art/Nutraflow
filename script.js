@@ -1,36 +1,50 @@
-const API_KEY = "VkNptkZejMnziNRguqo720nuF0VVOOUWPAMKRB0d"
+const API_KEY = "VkNptkZejMnziNRguqo720nuF0VVOOUWPAMKRB0d";
 
 const input = document.getElementById("foodInput");
 const result = document.getElementById("result");
 
-function quickSearch(food){
+document.getElementById("darkModeBtn").addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+});
+
+input.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        searchFood();
+    }
+});
+
+function quickSearch(food) {
     input.value = food;
     searchFood();
 }
 
-async function searchFood(){
+async function searchFood() {
 
     const query = input.value.trim();
 
-    if(!query){
-        alert("Type a food first");
+    if (!query) {
+        alert("Please enter a food.");
         return;
     }
 
     result.style.display = "block";
+    document.getElementById("foodName").textContent = "Searching...";
 
-    document.getElementById("foodName").innerText = "Searching...";
+    try {
 
-    try{
-
-        const res = await fetch(
-            `https://api.nal.usda.gov/fdc/v1/foods/search?query=${query}&pageSize=1&api_key=${API_KEY}`
+        const response = await fetch(
+            `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(query)}&pageSize=1&api_key=${API_KEY}`
         );
 
-        const data = await res.json();
+        if (!response.ok) {
+            throw new Error("API request failed");
+        }
 
-        if(!data.foods || data.foods.length === 0){
-            document.getElementById("foodName").innerText = "Not Found";
+        const data = await response.json();
+
+        if (!data.foods || data.foods.length === 0) {
+            document.getElementById("foodName").textContent = "Food Not Found";
+            document.getElementById("tip").textContent = "Try searching for another food.";
             return;
         }
 
@@ -38,126 +52,70 @@ async function searchFood(){
 
         let nutrients = {};
 
-        food.foodNutrients.forEach(n=>{
+        food.foodNutrients.forEach(n => {
             nutrients[n.nutrientName] = n.value || 0;
         });
 
-        const calories = nutrients["Energy"] || 0;
-        const protein = nutrients["Protein"] || 0;
-        const carbs = nutrients["Carbohydrate, by difference"] || 0;
-        const sugar = nutrients["Sugars, total including NLEA"] || 0;
-        const fiber = nutrients["Fiber, total dietary"] || 0;
+        const calories = Math.round(nutrients["Energy"] || 0);
+        const protein = +(nutrients["Protein"] || 0).toFixed(1);
+        const carbs = +(nutrients["Carbohydrate, by difference"] || 0).toFixed(1);
+        const sugar = +(nutrients["Sugars, total including NLEA"] || 0).toFixed(1);
+        const fiber = +(nutrients["Fiber, total dietary"] || 0).toFixed(1);
 
-        document.getElementById("foodName").innerText = food.description;
+        document.getElementById("foodName").textContent = food.description;
 
-        document.getElementById("calories").innerText = Math.round(calories);
-        document.getElementById("protein").innerText = protein + "g";
-        document.getElementById("carbs").innerText = carbs + "g";
-        document.getElementById("sugar").innerText = sugar + "g";
-        document.getElementById("fiber").innerText = fiber + "g";
+        document.getElementById("calories").textContent = calories + " kcal";
+        document.getElementById("protein").textContent = protein + " g";
+        document.getElementById("carbs").textContent = carbs + " g";
+        document.getElementById("sugar").textContent = sugar + " g";
+        document.getElementById("fiber").textContent = fiber + " g";
 
         let score = 100;
-        if(sugar > 20) score -= 25;
-        if(carbs > 40) score -= 15;
-        if(fiber > 5) score += 10;
-        if(protein > 15) score += 10;
 
-        score = Math.max(10, Math.min(100, score));
+        if (calories > 350) score -= 15;
+        if (carbs > 50) score -= 15;
+        if (sugar > 20) score -= 20;
+        if (fiber >= 5) score += 10;
+        if (protein >= 15) score += 10;
 
-        document.getElementById("score").innerText = score;
+        score = Math.max(20, Math.min(100, score));
 
-        document.getElementById("proteinBar").style.width = Math.min(protein * 5, 100) + "%";
-        document.getElementById("carbBar").style.width = Math.min(carbs * 2, 100) + "%";
+        document.getElementById("score").textContent = score + "/100";
+
+        document.getElementById("proteinBar").style.width = Math.min(protein * 4, 100) + "%";
+        document.getElementById("carbBar").style.width = Math.min(carbs, 100) + "%";
         document.getElementById("fiberBar").style.width = Math.min(fiber * 10, 100) + "%";
 
-        document.getElementById("tip").innerText =
-            sugar > 20 ? "High sugar food ⚠️" :
-            protein > 15 ? "Great protein source 💪" :
-            "Balanced food 👍";
+        let tip = "Enjoy as part of a balanced diet.";
 
-    } catch(err){
-        console.log(err);
-        alert("API error or missing key");
-    }
-}
-
-const input = document.getElementById("foodInput");
-const result = document.getElementById("result");
-
-function quickSearch(food){
-    input.value = food;
-    searchFood();
-}
-
-async function searchFood(){
-
-    const query = input.value.trim();
-
-    if(!query){
-        alert("Type a food first");
-        return;
-    }
-
-    result.style.display = "block";
-
-    document.getElementById("foodName").innerText = "Searching...";
-
-    try{
-
-        const res = await fetch(
-            `https://api.nal.usda.gov/fdc/v1/foods/search?query=${query}&pageSize=1&api_key=${API_KEY}`
-        );
-
-        const data = await res.json();
-
-        if(!data.foods || data.foods.length === 0){
-            document.getElementById("foodName").innerText = "Not Found";
-            return;
+        if (fiber >= 5) {
+            tip = "🥬 High in fiber. Great for digestive health.";
+        } else if (protein >= 20) {
+            tip = "💪 Excellent source of protein.";
+        } else if (sugar >= 20) {
+            tip = "⚠️ High in sugar. Eat in moderation.";
+        } else if (calories >= 400) {
+            tip = "🍽️ Higher in calories. Watch portion size.";
         }
 
-        const food = data.foods[0];
+        document.getElementById("tip").textContent = tip;
 
-        let nutrients = {};
+    } catch (error) {
 
-        food.foodNutrients.forEach(n=>{
-            nutrients[n.nutrientName] = n.value || 0;
-        });
+        console.error(error);
 
-        const calories = nutrients["Energy"] || 0;
-        const protein = nutrients["Protein"] || 0;
-        const carbs = nutrients["Carbohydrate, by difference"] || 0;
-        const sugar = nutrients["Sugars, total including NLEA"] || 0;
-        const fiber = nutrients["Fiber, total dietary"] || 0;
+        document.getElementById("foodName").textContent = "Connection Error";
+        document.getElementById("tip").textContent =
+            "Could not connect to the USDA database.";
 
-        document.getElementById("foodName").innerText = food.description;
-
-        document.getElementById("calories").innerText = Math.round(calories);
-        document.getElementById("protein").innerText = protein + "g";
-        document.getElementById("carbs").innerText = carbs + "g";
-        document.getElementById("sugar").innerText = sugar + "g";
-        document.getElementById("fiber").innerText = fiber + "g";
-
-        let score = 100;
-        if(sugar > 20) score -= 25;
-        if(carbs > 40) score -= 15;
-        if(fiber > 5) score += 10;
-        if(protein > 15) score += 10;
-
-        score = Math.max(10, Math.min(100, score));
-
-        document.getElementById("score").innerText = score;
-
-        document.getElementById("proteinBar").style.width = Math.min(protein * 5, 100) + "%";
-        document.getElementById("carbBar").style.width = Math.min(carbs * 2, 100) + "%";
-        document.getElementById("fiberBar").style.width = Math.min(fiber * 10, 100) + "%";
-
-        document.getElementById("tip").innerText =
-            sugar > 20 ? "High sugar food ⚠️" :
-            protein > 15 ? "Great protein source 💪" :
-            "Balanced food 👍";
-
-    } catch(err){
-        console.log(err);
-        alert("API error or missing key");
     }
 }
+
+const favoriteBtn = document.getElementById("favoriteBtn");
+
+let saved = false;
+
+favoriteBtn.addEventListener("click", () => {
+    saved = !saved;
+    favoriteBtn.textContent = saved ? "❤️ Saved" : "🤍 Save";
+});
