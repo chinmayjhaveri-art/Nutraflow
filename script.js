@@ -1,17 +1,7 @@
-const API_KEY = "VkNptkZejMnziNRguqo720nuF0VVOOUWPAMKRB0d";
-const searchBtn = document.querySelector(".search-container button");
+const API_KEY = "VkNptkZejMnziNRguqo720nuF0VVOOUWPAMKRB0d"
+
 const input = document.getElementById("foodInput");
 const result = document.getElementById("result");
-
-input.addEventListener("keypress", function(e){
-    if(e.key==="Enter"){
-        searchFood();
-    }
-});
-
-document.getElementById("darkModeBtn").addEventListener("click",()=>{
-    document.body.classList.toggle("dark");
-});
 
 function quickSearch(food){
     input.value = food;
@@ -22,128 +12,152 @@ async function searchFood(){
 
     const query = input.value.trim();
 
-    if(query===""){
-        alert("Please enter a food.");
+    if(!query){
+        alert("Type a food first");
         return;
     }
 
-    result.style.display="block";
+    result.style.display = "block";
 
-    document.getElementById("foodName").innerHTML="Searching...";
-    document.getElementById("calories").innerHTML="...";
-    document.getElementById("protein").innerHTML="...";
-    document.getElementById("carbs").innerHTML="...";
-    document.getElementById("sugar").innerHTML="...";
-    document.getElementById("fiber").innerHTML="...";
-    document.getElementById("score").innerHTML="...";
-    document.getElementById("glucose").innerHTML="...";
-    document.getElementById("tip").innerHTML="Loading nutrition...";
+    document.getElementById("foodName").innerText = "Searching...";
 
     try{
 
-        const response = await fetch(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(query)}&pageSize=1&api_key=${API_KEY}`);
+        const res = await fetch(
+            `https://api.nal.usda.gov/fdc/v1/foods/search?query=${query}&pageSize=1&api_key=${API_KEY}`
+        );
 
-        const data = await response.json();
+        const data = await res.json();
 
-        if(!data.foods || data.foods.length===0){
-
-            document.getElementById("foodName").innerHTML="Food Not Found";
-            document.getElementById("tip").innerHTML="Try another food.";
+        if(!data.foods || data.foods.length === 0){
+            document.getElementById("foodName").innerText = "Not Found";
             return;
-
         }
 
         const food = data.foods[0];
 
-        let nutrients={};
+        let nutrients = {};
 
         food.foodNutrients.forEach(n=>{
-
-            nutrients[n.nutrientName]=n.value;
-
+            nutrients[n.nutrientName] = n.value || 0;
         });
 
-        const calories=Math.round(nutrients["Energy"]||0);
+        const calories = nutrients["Energy"] || 0;
+        const protein = nutrients["Protein"] || 0;
+        const carbs = nutrients["Carbohydrate, by difference"] || 0;
+        const sugar = nutrients["Sugars, total including NLEA"] || 0;
+        const fiber = nutrients["Fiber, total dietary"] || 0;
 
-        const protein=Math.round((nutrients["Protein"]||0)*10)/10;
+        document.getElementById("foodName").innerText = food.description;
 
-        const carbs=Math.round((nutrients["Carbohydrate, by difference"]||0)*10)/10;
+        document.getElementById("calories").innerText = Math.round(calories);
+        document.getElementById("protein").innerText = protein + "g";
+        document.getElementById("carbs").innerText = carbs + "g";
+        document.getElementById("sugar").innerText = sugar + "g";
+        document.getElementById("fiber").innerText = fiber + "g";
 
-        const sugar=Math.round((nutrients["Sugars, total including NLEA"]||0)*10)/10;
+        let score = 100;
+        if(sugar > 20) score -= 25;
+        if(carbs > 40) score -= 15;
+        if(fiber > 5) score += 10;
+        if(protein > 15) score += 10;
 
-        const fiber=Math.round((nutrients["Fiber, total dietary"]||0)*10)/10;
+        score = Math.max(10, Math.min(100, score));
 
-        document.getElementById("foodName").innerHTML=food.description;
+        document.getElementById("score").innerText = score;
 
-        document.getElementById("calories").innerHTML=calories+" kcal";
+        document.getElementById("proteinBar").style.width = Math.min(protein * 5, 100) + "%";
+        document.getElementById("carbBar").style.width = Math.min(carbs * 2, 100) + "%";
+        document.getElementById("fiberBar").style.width = Math.min(fiber * 10, 100) + "%";
 
-        document.getElementById("protein").innerHTML=protein+" g";
+        document.getElementById("tip").innerText =
+            sugar > 20 ? "High sugar food ⚠️" :
+            protein > 15 ? "Great protein source 💪" :
+            "Balanced food 👍";
 
-        document.getElementById("carbs").innerHTML=carbs+" g";
-
-        document.getElementById("sugar").innerHTML=sugar+" g";
-
-        document.getElementById("fiber").innerHTML=fiber+" g";
-
-        // Health Score
-
-        let score=100;
-
-        if(calories>350) score-=15;
-
-        if(carbs>45) score-=15;
-
-        if(sugar>20) score-=20;
-
-        if(fiber>5) score+=10;
-
-        if(protein>15) score+=10;
-
-        if(score>100) score=100;
-
-        if(score<20) score=20;
-
-        document.getElementById("score").innerHTML=score+"/100";
-
-        // Glucose Impact
-
-        let glucose="🟢 Low";
-
-        if(carbs>25) glucose="🟡 Moderate";
-
-        if(carbs>50) glucose="🔴 High";
-
-        document.getElementById("glucose").innerHTML=glucose;
-
-        // Health Tip
-
-        let tip="Enjoy as part of a balanced diet.";
-
-        if(fiber>5)
-            tip="✅ High in fiber which supports digestive health.";
-
-        else if(protein>20)
-            tip="💪 Excellent source of protein.";
-
-        else if(sugar>20)
-            tip="⚠️ High in sugar. Enjoy in moderation.";
-
-        else if(calories>400)
-            tip="🍽️ Higher in calories. Watch portion size.";
-
-        document.getElementById("tip").innerHTML=tip;
-
+    } catch(err){
+        console.log(err);
+        alert("API error or missing key");
     }
-
-    catch(error){
-
-        document.getElementById("foodName").innerHTML="Connection Error";
-
-        document.getElementById("tip").innerHTML="Could not connect to USDA database.";
-
-        console.log(error);
-
-    }
-
 }
 
+const input = document.getElementById("foodInput");
+const result = document.getElementById("result");
+
+function quickSearch(food){
+    input.value = food;
+    searchFood();
+}
+
+async function searchFood(){
+
+    const query = input.value.trim();
+
+    if(!query){
+        alert("Type a food first");
+        return;
+    }
+
+    result.style.display = "block";
+
+    document.getElementById("foodName").innerText = "Searching...";
+
+    try{
+
+        const res = await fetch(
+            `https://api.nal.usda.gov/fdc/v1/foods/search?query=${query}&pageSize=1&api_key=${API_KEY}`
+        );
+
+        const data = await res.json();
+
+        if(!data.foods || data.foods.length === 0){
+            document.getElementById("foodName").innerText = "Not Found";
+            return;
+        }
+
+        const food = data.foods[0];
+
+        let nutrients = {};
+
+        food.foodNutrients.forEach(n=>{
+            nutrients[n.nutrientName] = n.value || 0;
+        });
+
+        const calories = nutrients["Energy"] || 0;
+        const protein = nutrients["Protein"] || 0;
+        const carbs = nutrients["Carbohydrate, by difference"] || 0;
+        const sugar = nutrients["Sugars, total including NLEA"] || 0;
+        const fiber = nutrients["Fiber, total dietary"] || 0;
+
+        document.getElementById("foodName").innerText = food.description;
+
+        document.getElementById("calories").innerText = Math.round(calories);
+        document.getElementById("protein").innerText = protein + "g";
+        document.getElementById("carbs").innerText = carbs + "g";
+        document.getElementById("sugar").innerText = sugar + "g";
+        document.getElementById("fiber").innerText = fiber + "g";
+
+        let score = 100;
+        if(sugar > 20) score -= 25;
+        if(carbs > 40) score -= 15;
+        if(fiber > 5) score += 10;
+        if(protein > 15) score += 10;
+
+        score = Math.max(10, Math.min(100, score));
+
+        document.getElementById("score").innerText = score;
+
+        document.getElementById("proteinBar").style.width = Math.min(protein * 5, 100) + "%";
+        document.getElementById("carbBar").style.width = Math.min(carbs * 2, 100) + "%";
+        document.getElementById("fiberBar").style.width = Math.min(fiber * 10, 100) + "%";
+
+        document.getElementById("tip").innerText =
+            sugar > 20 ? "High sugar food ⚠️" :
+            protein > 15 ? "Great protein source 💪" :
+            "Balanced food 👍";
+
+    } catch(err){
+        console.log(err);
+        alert("API error or missing key");
+    }
+}
