@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,6 +16,7 @@
 <link rel="stylesheet" href="style.css">
 
 <meta name="theme-color" content="#16A34A">
+
 </head>
 
 <body>
@@ -25,13 +27,11 @@
 🌿 NutraFlow
 </div>
 
-<ul>
-
+<ul class="nav-links">
 <li>Home</li>
 <li>Nutrition</li>
 <li>Healthy Tips</li>
 <li>About</li>
-
 </ul>
 
 <button id="darkModeBtn">
@@ -42,35 +42,26 @@
 
 <section class="hero">
 
-<h1>
+<h1>Know Your Food.</h1>
 
-Know Your Food.
-
-</h1>
-
-<h2>
-
-Fuel Your Future.
-
-</h2>
+<h2>Fuel Your Future.</h2>
 
 <p>
 
-Search thousands of foods and instantly discover calories, protein, carbohydrates, sugar, fiber, estimated glucose impact, and personalized nutrition insights.
+Search over thousands of foods and instantly discover nutrition facts,
+estimated glucose impact, health score and smart nutrition advice.
 
 </p>
 
 <div class="search-container">
 
 <input
-type="text"
 id="foodInput"
-placeholder="Search foods like Apple, Pizza, Rice...">
+type="text"
+placeholder="Search Apple, Pizza, Rice, Chicken...">
 
 <button onclick="searchFood()">
-
 Search
-
 </button>
 
 </div>
@@ -79,11 +70,7 @@ Search
 
 <section class="popular">
 
-<h2>
-
-🔥 Popular Searches
-
-</h2>
+<h2>🔥 Popular Searches</h2>
 
 <div class="chips">
 
@@ -91,9 +78,9 @@ Search
 
 <button onclick="quickSearch('Banana')">🍌 Banana</button>
 
-<button onclick="quickSearch('Pizza')">🍕 Pizza</button>
-
 <button onclick="quickSearch('Rice')">🍚 Rice</button>
+
+<button onclick="quickSearch('Pizza')">🍕 Pizza</button>
 
 <button onclick="quickSearch('Chicken Breast')">🍗 Chicken</button>
 
@@ -105,17 +92,47 @@ Search
 
 <section id="result" class="result-card">
 
+<div class="food-header">
+
 <h2 id="foodName">
 
 Search a food
 
 </h2>
 
+<button id="favoriteBtn">
+
+🤍 Save
+
+</button>
+
+</div>
+
+<div class="health-score">
+
+<div class="circle">
+
+<span id="score">
+
+--
+
+</span>
+
+</div>
+
+<p>
+
+Health Score
+
+</p>
+
+</div>
+
 <div class="nutrition-grid">
 
 <div class="box">
 
-Calories
+🔥 Calories
 
 <span id="calories">-</span>
 
@@ -123,7 +140,7 @@ Calories
 
 <div class="box">
 
-Protein
+💪 Protein
 
 <span id="protein">-</span>
 
@@ -131,7 +148,7 @@ Protein
 
 <div class="box">
 
-Carbohydrates
+🌾 Carbs
 
 <span id="carbs">-</span>
 
@@ -139,7 +156,7 @@ Carbohydrates
 
 <div class="box">
 
-Sugar
+🍬 Sugar
 
 <span id="sugar">-</span>
 
@@ -147,7 +164,7 @@ Sugar
 
 <div class="box">
 
-Fiber
+🥬 Fiber
 
 <span id="fiber">-</span>
 
@@ -155,27 +172,53 @@ Fiber
 
 <div class="box">
 
-Health Score
+🩸 Glucose
 
-<span id="score">-</span>
-
-</div>
+<span id="glucose">-</span>
 
 </div>
 
-<div class="glucose">
+</div>
 
-<h3>
+<h3 class="section-title">
 
-Estimated Glucose Impact
+Nutrition Breakdown
 
 </h3>
 
-<p id="glucose">
+<div class="progress">
 
--
+<p>Protein</p>
 
-</p>
+<div class="bar">
+
+<div id="proteinBar"></div>
+
+</div>
+
+</div>
+
+<div class="progress">
+
+<p>Carbohydrates</p>
+
+<div class="bar">
+
+<div id="carbBar"></div>
+
+</div>
+
+</div>
+
+<div class="progress">
+
+<p>Fiber</p>
+
+<div class="bar">
+
+<div id="fiberBar"></div>
+
+</div>
 
 </div>
 
@@ -183,13 +226,13 @@ Estimated Glucose Impact
 
 <h3>
 
-💡 Nutrition Tip
+💡 Smart Tip
 
 </h3>
 
 <p id="tip">
 
-Search for any food to receive a personalized health tip.
+Search for any food to receive personalized nutrition advice.
 
 </p>
 
