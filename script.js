@@ -1,5 +1,4 @@
 const API_KEY = "VkNptkZejMnziNRguqo720nuF0VVOOUWPAMKRB0d";
-
 const searchBtn = document.querySelector(".search-container button");
 const input = document.getElementById("foodInput");
 const result = document.getElementById("result");
@@ -147,3 +146,4 @@ async function searchFood(){
     }
 
 }
+
