@@ -1,39 +1,8 @@
-body{
-  font-family: Arial;
-  margin: 0;
-  background: #f4fff7;
-  font-size: 18px;
-}
-
-.hero{
-  text-align: center;
-  padding: 80px 20px;
-}
-
-.hero h1{
-  font-size: 48px;
-}
-
-.hero h2{
-  font-size: 28px;
-  color: #16a34a;
-}
-
-.search-container input{
-  width: 80%;
-  max-width: 600px;
-  padding: 18px;
-  font-size: 18px;
-}
-
-
-
-
-
-
-
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================
+   RESET
+========================== */
 
 *{
     margin:0;
@@ -42,126 +11,77 @@ body{
     font-family:'Poppins',sans-serif;
 }
 
-body{
-    background:linear-gradient(135deg,#F0FDF4,#DCFCE7);
-    color:#1F2937;
-    min-height:100vh;
-}
-
-/* Navigation */
-
-nav{
-    position:sticky;
-    top:0;
-    z-index:
-        /* ==========================
-   Popular Foods
-========================== */
-
-.popular{
-    max-width:1200px;
-    margin:40px auto;
-    padding:20px;
-}
-
-.popular h2{
-    text-align:center;
-    color:#15803D;
-    margin-bottom:30px;
-    font-size:2rem;
-}
-
-.chips{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:15px;
-}
-
-.chips button{
-    background:white;
-    border:none;
-    padding:14px 24px;
-    border-radius:50px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:600;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.3s;
-}
-
-.chips button:hover{
-    background:#16A34A;
-    color:white;
-    transform:translateY(-3px);
-}
-
-/* ==========================
-   Result Card
+html{
+    scroll
+  /* ==========================
+   RESULT CARD
 ========================== */
 
 .result-card{
     display:none;
-    max-width:1100px;
-    margin:50px auto;
+    max-width:1200px;
+    margin:60px auto;
+    padding:40px;
     background:white;
     border-radius:30px;
-    padding:40px;
-    box-shadow:0 20px 40px rgba(0,0,0,.12);
+    box-shadow:0 25px 60px rgba(0,0,0,.12);
+    animation:fadeIn .5s ease;
 }
 
 .food-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:20px;
     margin-bottom:35px;
     flex-wrap:wrap;
-    gap:15px;
 }
 
 .food-header h2{
-    color:#16A34A;
     font-size:2rem;
+    color:#15803D;
 }
 
 #favoriteBtn{
     border:none;
     background:#16A34A;
     color:white;
-    padding:12px 24px;
-    border-radius:15px;
-    cursor:pointer;
+    padding:12px 28px;
+    border-radius:14px;
     font-size:16px;
+    font-weight:600;
+    cursor:pointer;
     transition:.3s;
 }
 
 #favoriteBtn:hover{
     background:#15803D;
-    transform:scale(1.05);
+    transform:translateY(-2px);
 }
 
 /* ==========================
-   Health Score
+   HEALTH SCORE
 ========================== */
 
 .health-score{
-    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
     margin-bottom:40px;
 }
 
 .circle{
     width:180px;
     height:180px;
-    margin:auto;
     border-radius:50%;
+    background:linear-gradient(135deg,#22C55E,#16A34A);
+    color:white;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#22C55E,#16A34A);
-    color:white;
     font-size:42px;
     font-weight:700;
-    box-shadow:0 20px 40px rgba(34,197,94,.3);
+    box-shadow:0 15px 35px rgba(34,197,94,.35);
 }
 
 .health-score p{
@@ -170,8 +90,9 @@ nav{
     font-weight:600;
     color:#15803D;
 }
+
 /* ==========================
-   Nutrition Grid
+   NUTRITION GRID
 ========================== */
 
 .nutrition-grid{
@@ -183,40 +104,37 @@ nav{
 
 .box{
     background:#F0FDF4;
-    border-radius:20px;
     padding:25px;
+    border-radius:20px;
     text-align:center;
-    font-size:18px;
-    font-weight:600;
     transition:.3s;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
 .box:hover{
     transform:translateY(-6px);
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
 }
 
 .box span{
     display:block;
-    margin-top:15px;
-    color:#16A34A;
+    margin-top:12px;
     font-size:28px;
     font-weight:700;
+    color:#16A34A;
 }
 
 /* ==========================
-   Section Title
+   SECTION TITLE
 ========================== */
 
 .section-title{
-    margin-top:45px;
-    margin-bottom:20px;
-    color:#15803D;
+    margin:45px 0 20px;
     font-size:28px;
+    color:#15803D;
 }
 
 /* ==========================
-   Progress Bars
+   PROGRESS BARS
 ========================== */
 
 .progress{
@@ -226,7 +144,6 @@ nav{
 .progress p{
     margin-bottom:8px;
     font-weight:600;
-    color:#374151;
 }
 
 .bar{
@@ -238,23 +155,23 @@ nav{
 }
 
 .bar div{
-    height:100%;
     width:0%;
+    height:100%;
     border-radius:30px;
     background:linear-gradient(90deg,#22C55E,#16A34A);
     transition:width 1s ease;
 }
 
 /* ==========================
-   Smart Tip
+   SMART TIP
 ========================== */
 
 .tip{
     margin-top:40px;
-    background:#FEF9C3;
-    border-left:8px solid #FACC15;
     padding:25px;
     border-radius:18px;
+    background:#FEF9C3;
+    border-left:8px solid #FACC15;
 }
 
 .tip h3{
@@ -263,285 +180,24 @@ nav{
 }
 
 .tip p{
-    line-height:1.7;
     color:#4B5563;
-    font-size:17px;
+    line-height:1.7;
 }
 
 /* ==========================
-   Loading Animation
+   ANIMATIONS
 ========================== */
-
-.loading{
-    animation:pulse 1.2s infinite;
-}
-
-@keyframes pulse{
-
-0%{
-opacity:.5;
-}
-
-50%{
-opacity:1;
-}
-
-100%{
-opacity:.5;
-}
-
-}
-
-/* ==========================
-   Fade Animation
-========================== */
-
-.result-card{
-    animation:fadeIn .5s ease;
-}
 
 @keyframes fadeIn{
 
-from{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
 
-opacity:0;
-transform:translateY(25px);
-
-}
-
-to{
-
-opacity:1;
-transform:translateY(0);
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 
 }
-
-}
-/* ==========================
-   Footer
-========================== */
-
-footer{
-    margin-top:80px;
-    padding:30px;
-    text-align:center;
-    color:#6B7280;
-    font-size:15px;
-}
-
-/* ==========================
-   Dark Mode
-========================== */
-
-.dark{
-    background:#0F172A;
-    color:white;
-}
-
-.dark nav{
-    background:#111827;
-}
-
-.dark .logo{
-    color:#4ADE80;
-}
-
-.dark .hero h1,
-.dark .hero h2,
-.dark .popular h2,
-.dark .section-title,
-.dark .food-header h2{
-    color:white;
-}
-
-.dark .hero p{
-    color:#CBD5E1;
-}
-
-.dark .search-container input{
-    background:#1E293B;
-    color:white;
-}
-
-.dark .search-container input::placeholder{
-    color:#94A3B8;
-}
-
-.dark .chips button{
-    background:#1E293B;
-    color:white;
-}
-
-.dark .chips button:hover{
-    background:#16A34A;
-}
-
-.dark .result-card{
-    background:#111827;
-}
-
-.dark .box{
-    background:#1E293B;
-    color:white;
-}
-
-.dark .box span{
-    color:#4ADE80;
-}
-
-.dark .bar{
-    background:#334155;
-}
-
-.dark .tip{
-    background:#3F3F1A;
-    color:white;
-}
-
-.dark .tip p{
-    color:#E5E7EB;
-}
-
-.dark footer{
-    color:#CBD5E1;
-}
-
-/* ==========================
-   Responsive Design
-========================== */
-
-@media (max-width:992px){
-
-nav{
-    flex-direction:column;
-    gap:20px;
-}
-
-.nav-links{
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-.hero h1{
-    font-size:48px;
-}
-
-.hero h2{
-    font-size:30px;
-}
-
-.search-container{
-    flex-direction:column;
-    align-items:center;
-}
-
-.search-container input,
-.search-container button{
-    width:100%;
-    max-width:500px;
-}
-
-.food-header{
-    flex-direction:column;
-    text-align:center;
-}
-
-.circle{
-    width:150px;
-    height:150px;
-    font-size:36px;
-}
-
-}
-
-@media (max-width:768px){
-
-.hero{
-    padding:40px 20px;
-}
-
-.hero h1{
-    font-size:38px;
-}
-
-.hero h2{
-    font-size:26px;
-}
-
-.hero p{
-    font-size:16px;
-}
-
-.result-card{
-    margin:20px;
-    padding:25px;
-}
-
-.nutrition-grid{
-    grid-template-columns:1fr;
-}
-
-.box{
-    font-size:16px;
-}
-
-.circle{
-    width:130px;
-    height:130px;
-    font-size:30px;
-}
-
-.popular{
-    padding:15px;
-}
-
-}
-
-/* ==========================
-   Custom Scrollbar
-========================== */
-
-::-webkit-scrollbar{
-    width:10px;
-}
-
-::-webkit-scrollbar-track{
-    background:#E5E7EB;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#16A34A;
-    border-radius:20px;
-}
-
-::-webkit-scrollbar-thumb:hover{
-    background:#15803D;
-}
-
-/* ==========================
-   Smooth Scrolling
-========================== */
-
-html{
-    scroll-behavior:smooth;
-}
-
-/* ==========================
-   Button Animation
-========================== */
-
-button{
-    transition:all .3s ease;
-}
-
-button:hover{
-    transform:translateY(-2px);
-}
-
-/* ==========================
-   Card Hover
-========================== */
-
-.result-card:hover{
-    box-shadow:0 25px 60px rgba(0,0,0,.15);
-}    
