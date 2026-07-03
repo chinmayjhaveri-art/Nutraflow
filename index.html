@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NutraFlow</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<meta name="theme-color" content="#16A34A">
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+🌿 NutraFlow
+</div>
+
+<ul>
+
+<li>Home</li>
+<li>Nutrition</li>
+<li>Healthy Tips</li>
+<li>About</li>
+
+</ul>
+
+<button id="darkModeBtn">
+🌙
+</button>
+
+</nav>
+
+<section class="hero">
+
+<h1>
+
+Know Your Food.
+
+</h1>
+
+<h2>
+
+Fuel Your Future.
+
+</h2>
+
+<p>
+
+Search thousands of foods and instantly discover calories, protein, carbohydrates, sugar, fiber, estimated glucose impact, and personalized nutrition insights.
+
+</p>
+
+<div class="search-container">
+
+<input
+type="text"
+id="foodInput"
+placeholder="Search foods like Apple, Pizza, Rice...">
+
+<button onclick="searchFood()">
+
+Search
+
+</button>
+
+</div>
+
+</section>
+
+<section class="popular">
+
+<h2>
+
+🔥 Popular Searches
+
+</h2>
+
+<div class="chips">
+
+<button onclick="quickSearch('Apple')">🍎 Apple</button>
+
+<button onclick="quickSearch('Banana')">🍌 Banana</button>
+
+<button onclick="quickSearch('Pizza')">🍕 Pizza</button>
+
+<button onclick="quickSearch('Rice')">🍚 Rice</button>
+
+<button onclick="quickSearch('Chicken Breast')">🍗 Chicken</button>
+
+<button onclick="quickSearch('Broccoli')">🥦 Broccoli</button>
+
+</div>
+
+</section>
+
+<section id="result" class="result-card">
+
+<h2 id="foodName">
+
+Search a food
+
+</h2>
+
+<div class="nutrition-grid">
+
+<div class="box">
+
+Calories
+
+<span id="calories">-</span>
+
+</div>
+
+<div class="box">
+
+Protein
+
+<span id="protein">-</span>
+
+</div>
+
+<div class="box">
+
+Carbohydrates
+
+<span id="carbs">-</span>
+
+</div>
+
+<div class="box">
+
+Sugar
+
+<span id="sugar">-</span>
+
+</div>
+
+<div class="box">
+
+Fiber
+
+<span id="fiber">-</span>
+
+</div>
+
+<div class="box">
+
+Health Score
+
+<span id="score">-</span>
+
+</div>
+
+</div>
+
+<div class="glucose">
+
+<h3>
+
+Estimated Glucose Impact
+
+</h3>
+
+<p id="glucose">
+
+-
+
+</p>
+
+</div>
+
+<div class="tip">
+
+<h3>
+
+💡 Nutrition Tip
+
+</h3>
+
+<p id="tip">
+
+Search for any food to receive a personalized health tip.
+
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+
+© 2026 NutraFlow • Know Your Food. Fuel Your Future.
+
+</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
