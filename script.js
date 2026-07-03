@@ -117,5 +117,209 @@ let saved = false;
 
 favoriteBtn.addEventListener("click", () => {
     saved = !saved;
-    favoriteBtn.textContent = saved ? "❤️ Saved" : "🤍 Save";
+    favoriteBtn.textContent = saved ? "❤️ Saved" : "🤍 Save";    
 });
+/* ==========================
+   FOOTER
+========================== */
+
+footer{
+    margin-top:80px;
+    padding:35px 20px;
+    text-align:center;
+    color:#6B7280;
+    font-size:15px;
+}
+
+/* ==========================
+   DARK MODE
+========================== */
+
+.dark{
+    background:#0F172A;
+    color:white;
+}
+
+.dark nav{
+    background:#111827;
+}
+
+.dark .logo{
+    color:#4ADE80;
+}
+
+.dark .hero h1,
+.dark .hero h2,
+.dark .popular h2,
+.dark .section-title,
+.dark .food-header h2{
+    color:white;
+}
+
+.dark .hero p{
+    color:#CBD5E1;
+}
+
+.dark .search-container input{
+    background:#1E293B;
+    color:white;
+    border:1px solid #334155;
+}
+
+.dark .search-container input::placeholder{
+    color:#94A3B8;
+}
+
+.dark .chips button{
+    background:#1E293B;
+    color:white;
+}
+
+.dark .chips button:hover{
+    background:#16A34A;
+}
+
+.dark .result-card{
+    background:#111827;
+}
+
+.dark .box{
+    background:#1E293B;
+    color:white;
+}
+
+.dark .box span{
+    color:#4ADE80;
+}
+
+.dark .bar{
+    background:#334155;
+}
+
+.dark .tip{
+    background:#3F3F1A;
+}
+
+.dark .tip p{
+    color:#E5E7EB;
+}
+
+.dark footer{
+    color:#CBD5E1;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width:992px){
+
+    nav{
+        flex-direction:column;
+        gap:18px;
+    }
+
+    .hero{
+        padding:60px 20px;
+    }
+
+    .hero h1{
+        font-size:52px;
+    }
+
+    .hero h2{
+        font-size:32px;
+    }
+
+    .search-container{
+        flex-direction:column;
+    }
+
+    .search-container input,
+    .search-container button{
+        width:100%;
+        max-width:600px;
+    }
+
+    .food-header{
+        flex-direction:column;
+        text-align:center;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .hero{
+        padding:40px 20px;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .hero h2{
+        font-size:26px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .result-card{
+        margin:20px;
+        padding:25px;
+    }
+
+    .nutrition-grid{
+        grid-template-columns:1fr;
+    }
+
+    .circle{
+        width:140px;
+        height:140px;
+        font-size:32px;
+    }
+
+    .chips{
+        justify-content:center;
+    }
+
+}
+
+/* ==========================
+   SCROLLBAR
+========================== */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#E5E7EB;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#16A34A;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#15803D;
+}
+
+/* ==========================
+   GLOBAL BUTTONS
+========================== */
+
+button{
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.result-card:hover{
+    box-shadow:0 30px 70px rgba(0,0,0,.15);
+}
