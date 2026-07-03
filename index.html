@@ -1,82 +1,112 @@
-const API_KEY = "YOUR_API_KEY_HERE";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NutraFlow</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-const input = document.getElementById("foodInput");
-const result = document.getElementById("result");
+<body>
 
-function quickSearch(food){
-    input.value = food;
-    searchFood();
-}
+<!-- 🌿 NAV -->
+<nav>
+    <div class="logo">🌿 NutraFlow</div>
 
-async function searchFood(){
+    <button id="darkModeBtn">🌙</button>
+</nav>
 
-    const query = input.value.trim();
+<!-- 🌟 HERO -->
+<section class="hero">
 
-    if(!query){
-        alert("Type a food first");
-        return;
-    }
+    <div class="hero-text">
 
-    result.style.display = "block";
+        <h1>Know Your Food.</h1>
+        <h2>Fuel Your Future.</h2>
 
-    document.getElementById("foodName").innerText = "Searching...";
+        <p>Search any food and discover nutrition instantly.</p>
 
-    try{
+        <div class="search-container">
+            <input id="foodInput" placeholder="Search food (e.g. apple, rice, pizza)">
+            <button onclick="searchFood()">Search</button>
+        </div>
 
-        const res = await fetch(
-            `https://api.nal.usda.gov/fdc/v1/foods/search?query=${query}&pageSize=1&api_key=${API_KEY}`
-        );
+    </div>
 
-        const data = await res.json();
+</section>
 
-        if(!data.foods || data.foods.length === 0){
-            document.getElementById("foodName").innerText = "Not Found";
-            return;
-        }
+<!-- 🔥 POPULAR -->
+<section class="popular">
 
-        const food = data.foods[0];
+    <h2>Trending Foods</h2>
 
-        let nutrients = {};
+    <div class="chips">
+        <button onclick="quickSearch('Apple')">🍎 Apple</button>
+        <button onclick="quickSearch('Avocado')">🥑 Avocado</button>
+        <button onclick="quickSearch('Banana')">🍌 Banana</button>
+        <button onclick="quickSearch('Chicken')">🍗 Chicken</button>
+        <button onclick="quickSearch('Rice')">🍚 Rice</button>
+        <button onclick="quickSearch('Pizza')">🍕 Pizza</button>
+    </div>
 
-        food.foodNutrients.forEach(n=>{
-            nutrients[n.nutrientName] = n.value || 0;
-        });
+</section>
 
-        const calories = nutrients["Energy"] || 0;
-        const protein = nutrients["Protein"] || 0;
-        const carbs = nutrients["Carbohydrate, by difference"] || 0;
-        const sugar = nutrients["Sugars, total including NLEA"] || 0;
-        const fiber = nutrients["Fiber, total dietary"] || 0;
+<!-- 📊 RESULT -->
+<section class="result-card" id="result">
 
-        document.getElementById("foodName").innerText = food.description;
+    <div class="food-header">
+        <h2 id="foodName">Food Name</h2>
+        <button id="favoriteBtn">🤍 Save</button>
+    </div>
 
-        document.getElementById("calories").innerText = Math.round(calories);
-        document.getElementById("protein").innerText = protein + "g";
-        document.getElementById("carbs").innerText = carbs + "g";
-        document.getElementById("sugar").innerText = sugar + "g";
-        document.getElementById("fiber").innerText = fiber + "g";
+    <!-- ⭐ HEALTH SCORE -->
+    <div class="health-score">
+        <div class="circle" id="score">0/100</div>
+        <p>Health Score</p>
+    </div>
 
-        let score = 100;
-        if(sugar > 20) score -= 25;
-        if(carbs > 40) score -= 15;
-        if(fiber > 5) score += 10;
-        if(protein > 15) score += 10;
+    <!-- 📦 NUTRITION -->
+    <div class="nutrition-grid">
 
-        score = Math.max(10, Math.min(100, score));
+        <div class="box">Calories <span id="calories">0</span></div>
+        <div class="box">Protein <span id="protein">0g</span></div>
+        <div class="box">Carbs <span id="carbs">0g</span></div>
+        <div class="box">Sugar <span id="sugar">0g</span></div>
+        <div class="box">Fiber <span id="fiber">0g</span></div>
 
-        document.getElementById("score").innerText = score;
+    </div>
 
-        document.getElementById("proteinBar").style.width = Math.min(protein * 5, 100) + "%";
-        document.getElementById("carbBar").style.width = Math.min(carbs * 2, 100) + "%";
-        document.getElementById("fiberBar").style.width = Math.min(fiber * 10, 100) + "%";
+    <!-- 📈 BARS -->
+    <h3 class="section-title">Nutrition Breakdown</h3>
 
-        document.getElementById("tip").innerText =
-            sugar > 20 ? "High sugar food ⚠️" :
-            protein > 15 ? "Great protein source 💪" :
-            "Balanced food 👍";
+    <div class="progress">
+        <p>Protein</p>
+        <div class="bar"><div id="proteinBar"></div></div>
+    </div>
 
-    } catch(err){
-        console.log(err);
-        alert("API error or missing key");
-    }
-}
+    <div class="progress">
+        <p>Carbs</p>
+        <div class="bar"><div id="carbBar"></div></div>
+    </div>
+
+    <div class="progress">
+        <p>Fiber</p>
+        <div class="bar"><div id="fiberBar"></div></div>
+    </div>
+
+    <!-- 💡 TIP -->
+    <div class="tip">
+        <h3>Smart Tip</h3>
+        <p id="tip">Search a food to get insights</p>
+    </div>
+
+</section>
+
+<!-- 🦶 FOOTER -->
+<footer>
+    NutraFlow • Built with ❤️
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
