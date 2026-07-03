@@ -2,7 +2,7 @@
 // NUTRAFLOW V2
 // ==========================
 
-const API_KEY = "PASTE_YOUR_NEW_USDA_API_KEY_HERE";
+const API_KEY = "VkNptkZejMnziNRguqo720nuF0VVOOUWPAMKRB0d";
 
 const input = document.getElementById("foodInput");
 const result = document.getElementById("result");
