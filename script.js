@@ -2,7 +2,7 @@
 // NUTRAFLOW V2
 // ==========================
 
-const API_KEY = "";
+const API_KEY = "kN9dbYfnbGoaT83IdYPewYST2FSRTDdxmTrTJub6";
 
 const input = document.getElementById("foodInput");
 const result = document.getElementById("result");
