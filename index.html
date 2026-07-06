@@ -8,41 +8,68 @@
 
 <title>NutraFlow</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<!-- ==========================
-     NAVBAR
-========================== -->
+<!-- NAVIGATION -->
 
 <nav>
 
 <div class="logo">
+
 🌿 NutraFlow
+
 </div>
 
+<ul>
+
+<li><a href="#">Home</a></li>
+
+<li><a href="#popular">Foods</a></li>
+
+<li><a href="#result">Nutrition</a></li>
+
+</ul>
+
 <button id="darkModeBtn">
+
 🌙
+
 </button>
 
 </nav>
 
-<!-- ==========================
-     HERO
-========================== -->
+<!-- HERO -->
 
 <section class="hero">
 
-<h1>Know Your Food.</h1>
+<div class="hero-left">
 
-<h2>Fuel Your Future.</h2>
+<h1>
+
+Know Your Food.
+
+</h1>
+
+<h2>
+
+Fuel Your Future.
+
+</h2>
 
 <p>
+
 Search thousands of foods and instantly discover calories,
-protein, carbs, sugar, fiber and a health score.
+protein, carbs, sugar, fiber and nutrition insights.
+
 </p>
 
 <div class="search-container">
@@ -50,23 +77,39 @@ protein, carbs, sugar, fiber and a health score.
 <input
 id="foodInput"
 type="text"
-placeholder="Search a food (Apple, Rice, Pizza...)">
+placeholder="Search Apple, Rice, Pizza...">
 
 <button onclick="searchFood()">
+
 Search
+
 </button>
+
+</div>
+
+</div>
+
+<div class="hero-right">
+
+<img
+src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=700"
+alt="Healthy Food">
 
 </div>
 
 </section>
 
-<!-- ==========================
-     TRENDING
-========================== -->
+<!-- POPULAR -->
 
-<section class="popular">
+<section
+class="popular"
+id="popular">
 
-<h2>🔥 Trending Foods</h2>
+<h2>
+
+🔥 Trending Foods
+
+</h2>
 
 <div class="chips">
 
@@ -78,9 +121,9 @@ Search
 
 <button onclick="quickSearch('Rice')">🍚 Rice</button>
 
-<button onclick="quickSearch('Chicken Breast')">🍗 Chicken</button>
-
 <button onclick="quickSearch('Pizza')">🍕 Pizza</button>
+
+<button onclick="quickSearch('Chicken Breast')">🍗 Chicken</button>
 
 <button onclick="quickSearch('Egg')">🥚 Egg</button>
 
@@ -90,9 +133,7 @@ Search
 
 </section>
 
-<!-- ==========================
-     RESULT
-========================== -->
+<!-- RESULTS -->
 
 <section
 class="result-card"
@@ -101,16 +142,18 @@ id="result">
 <div class="food-header">
 
 <h2 id="foodName">
+
 Search a Food
+
 </h2>
 
 <button id="favoriteBtn">
+
 🤍 Save
+
 </button>
 
 </div>
-
-<!-- Health Score -->
 
 <div class="health-score">
 
@@ -122,158 +165,10 @@ id="score">
 
 </div>
 
-<p>Health Score</p>
-
-</div>
-
-<!-- Nutrition -->
-
-<div class="nutrition-grid">
-
-<div class="box">
-
-Calories
-
-<span id="calories">
-
-0 kcal
-
-</span>
-
-</div>
-
-<div class="box">
-
-Protein
-
-<span id="protein">
-
-0 g
-
-</span>
-
-</div>
-
-<div class="box">
-
-Carbs
-
-<span id="carbs">
-
-0 g
-
-</span>
-
-</div>
-
-<div class="box">
-
-Sugar
-
-<span id="sugar">
-
-0 g
-
-</span>
-
-</div>
-
-<div class="box">
-
-Fiber
-
-<span id="fiber">
-
-0 g
-
-</span>
-
-</div>
-
-</div>
-
-<!-- Progress -->
-
-<h3 class="section-title">
-
-Nutrition Breakdown
-
-</h3>
-
-<div class="progress">
-
-<p>Protein</p>
-
-<div class="bar">
-
-<div id="proteinBar"></div>
-
-</div>
-
-</div>
-
-<div class="progress">
-
-<p>Carbs</p>
-
-<div class="bar">
-
-<div id="carbBar"></div>
-
-</div>
-
-</div>
-
-<div class="progress">
-
-<p>Fiber</p>
-
-<div class="bar">
-
-<div id="fiberBar"></div>
-
-</div>
-
-</div>
-
-<!-- Tip -->
-
-<div class="tip">
-
-<h3>💡 Smart Tip</h3>
-
-<p id="tip">
-
-Search a food to begin.
-
-</p>
-
-</div>
-
-</section>
-
-<!-- ==========================
-     FOOTER
-========================== -->
-
-<footer>
-
 <p>
 
-🌿 NutraFlow © 2026
+Health Score
 
 </p>
 
-<p>
-
-Built with ❤️ using the USDA FoodData Central API
-
-</p>
-
-</footer>
-
-<script src="script.js"></script>
-
-</body>
-
-</html>
+</div>
